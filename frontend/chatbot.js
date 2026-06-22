@@ -16,7 +16,7 @@
   // └─────────────────────────────────────────────────────────────────┘
   var CONFIG = {
     /** Full URL of the /chat endpoint on your backend */
-    backendUrl: 'http://localhost:3000/chat',
+    backendUrl: 'https://api.legatusaisolutions.com/chat',
 
     /** Text shown in the launcher bubble */
     launcherLabel: 'AI',

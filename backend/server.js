@@ -1,4 +1,5 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
 
 const express = require('express');
 const cors = require('cors');
@@ -31,7 +32,7 @@ function createApp(options = {}) {
 
     try {
       const response = await anthropicClient.messages.create({
-        model: process.env.ANTHROPIC_MODEL || 'claude-3-5-haiku-latest',
+        model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6',
         max_tokens: 512,
         messages: [{ role: 'user', content: message }]
       });

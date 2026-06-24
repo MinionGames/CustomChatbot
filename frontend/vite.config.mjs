@@ -11,8 +11,7 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        site: resolve(__dirname, 'index.html'),
-        chatbot: resolve(__dirname, 'chatbot.js')
+        site: resolve(__dirname, 'index.html')
       },
       output: {
         entryFileNames: '[name].js',

@@ -58,7 +58,7 @@ export default function App() {
               <span>Standalone</span>
             </div>
             <pre className="overflow-x-auto whitespace-pre-wrap wrap-break-word font-mono text-[0.92rem] leading-6 text-[color-mix(in_oklab,var(--sidebar-primary-foreground)_92%,var(--background))]">
-{`<script type="module" src="/dist/frontend/chatbot.js"></script>`}
+{`<script src="https://YOUR-VERCEL-DOMAIN/chatbot.js"></script>`}
             </pre>
           </div>
         </div>

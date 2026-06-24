@@ -5,6 +5,8 @@
   "main": "chatbot.js",
   "scripts": {
     "start": "node backend/server.js",
+    "dev": "npm run frontend:dev",
+    "build": "npm run frontend:build",
     "frontend:dev": "vite --config frontend/vite.config.mjs",
     "frontend:build": "vite build --config frontend/vite.config.mjs",
     "frontend:preview": "vite preview --config frontend/vite.config.mjs",

@@ -93,7 +93,7 @@ export default function ChatbotWidget({ config = {} }) {
   };
 
   return (
-    <section className={`fixed right-6 bottom-6 z-1000 font-sans ${isOpen ? 'chat-widget-open' : ''}`}>
+    <section className={`fixed right-6 bottom-6 z-1000 ${isOpen ? 'chat-widget-open' : ''}`}>
       <button
         className="relative grid h-16 w-16 place-items-center rounded-full border-0 bg-[linear-gradient(160deg,#165f82,#0e4b67)] text-[1.05rem] font-bold text-sky-50 shadow-[0_16px_36px_rgba(16,48,66,0.24)] transition-transform duration-200 hover:-translate-y-px hover:scale-[1.03]"
         aria-label="Open chat"

@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 /* Embed-only theme tokens so host pages do not need app-level CSS variables. */
-:root {
+:root,
+:host {
   --widget-bg: oklch(1 0 0);
   --widget-border: oklch(0.922 0.005 34.3);
   --header-start: oklch(0.681 0.162 75.834);
@@ -16,7 +17,8 @@
 }
 
 :root.dark,
-.dark {
+.dark,
+:host(.dark) {
   --widget-bg: oklch(0.214 0.009 43.1);
   --widget-border: oklch(1 0 0 / 10%);
   --header-start: oklch(0.214 0.009 43.1);
@@ -36,5 +38,10 @@
 }
 
 .custom-chatbot-root {
-  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+  --custom-chatbot-font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+  font-family: var(--custom-chatbot-font-family) !important;
+}
+
+.custom-chatbot-root * {
+  font-family: inherit;
 }

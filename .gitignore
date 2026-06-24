@@ -17,6 +17,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
 # Diagnostic reports
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -38,10 +39,11 @@ coverage
 .nyc_output
 
 # Build outputs (Uncomment if you compile TS/Next/Nuxt)
-# dist/
-# build/
-# .next/
-# .nuxt/
+dist/
+dist-ssr/
+build/
+.next/
+.nuxt/
 
 # TypeScript cache
 *.tsbuildinfo
@@ -63,3 +65,17 @@ coverage
 # OS files (Highly recommended)
 .DS_Store
 Thumbs.db
+
+# Tailwind CSS compiled outputs (if using Tailwind CLI standalone)
+# Prevent tracking bloated, auto-generated utility style sheets
+tailwind-output.css
+dist/assets/*.css
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

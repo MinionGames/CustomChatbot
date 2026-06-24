@@ -7,7 +7,7 @@ export default defineConfig({
   root: resolve(__dirname),
   plugins: [tailwindcss(), react()],
   build: {
-    outDir: resolve(__dirname, '..', 'dist', 'frontend'),
+    outDir: resolve(__dirname, 'dist'),
     emptyOutDir: true,
     rollupOptions: {
       input: {

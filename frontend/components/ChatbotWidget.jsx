@@ -1,7 +1,8 @@
 import React, { useMemo, useRef, useState } from 'react';
 
+const HARD_CODED_BACKEND_URL = 'https://api.legatusaisolutions.com/chat';
+
 const DEFAULT_CONFIG = {
-  backendUrl: 'https://api.legatusaisolutions.com/chat',
   launcherLabel: 'AI',
   title: 'AI Assistant',
   subtitle: 'Online now',
@@ -61,7 +62,7 @@ export default function ChatbotWidget({ config = {} }) {
     setIsSending(true);
 
     try {
-      const response = await fetch(mergedConfig.backendUrl, {
+      const response = await fetch(HARD_CODED_BACKEND_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message })
@@ -85,7 +86,7 @@ export default function ChatbotWidget({ config = {} }) {
       const reply = typeof responseData.reply === 'string' ? responseData.reply.trim() : '';
       appendMessage('bot', reply || 'The model returned an empty response.');
     } catch {
-      appendMessage('bot', `Request failed - is the backend running at:\n${mergedConfig.backendUrl}`);
+      appendMessage('bot', `Request failed - is the backend running at:\n${HARD_CODED_BACKEND_URL}`);
     } finally {
       setIsSending(false);
     }

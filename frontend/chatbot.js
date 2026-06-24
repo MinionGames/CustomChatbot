@@ -35,7 +35,6 @@ function readScriptConfig() {
   }
 
   const {
-    backendUrl,
     launcherLabel,
     title,
     subtitle,
@@ -46,7 +45,6 @@ function readScriptConfig() {
   } = script.dataset;
 
   const config = {};
-  if (backendUrl) config.backendUrl = backendUrl;
   if (launcherLabel) config.launcherLabel = launcherLabel;
   if (title) config.title = title;
   if (subtitle) config.subtitle = subtitle;

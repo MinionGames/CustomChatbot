@@ -18,9 +18,14 @@ Embed it on any website with a single script tag:
 <script src="https://YOUR-DEPLOYMENT/chatbot.js"></script>
 ```
 
+The widget backend is hardcoded to:
+
+```text
+https://api.legatusaisolutions.com/chat
+```
+
 Optional script attributes:
 
-- `data-backend-url`: chat API endpoint
 - `data-launcher-label`: launcher button label
 - `data-title`: widget title
 - `data-subtitle`: widget subtitle
@@ -34,7 +39,6 @@ Example with options:
 ```html
 <script
 	src="https://YOUR-DEPLOYMENT/chatbot.js"
-	data-backend-url="https://api.example.com/chat"
 	data-title="Support Assistant"
 	data-subtitle="We reply in minutes"
 	data-target="#chatbot-slot"
@@ -46,7 +50,6 @@ You can also configure via global variables before loading the script:
 ```html
 <script>
 	window.CustomChatbotConfig = {
-		backendUrl: 'https://api.example.com/chat',
 		title: 'Support Assistant'
 	};
 	window.CustomChatbotTarget = '#chatbot-slot';
@@ -60,7 +63,7 @@ If `auto-mount` is disabled, mount manually:
 <script>
 	window.mountCustomChatbot({
 		target: '#chatbot-slot',
-		config: { backendUrl: 'https://api.example.com/chat' }
+		config: { title: 'Support Assistant' }
 	});
 </script>
 ```

@@ -3,12 +3,14 @@ import React, { useMemo, useRef, useState } from 'react';
 const HARD_CODED_BACKEND_URL = 'https://api.legatusaisolutions.com/chat';
 
 const DEFAULT_CONFIG = {
-  launcherLabel: 'AI',
-  title: 'AI Assistant',
-  subtitle: 'Online now',
-  greeting: 'Hi, I am your AI assistant. How can I help you today?',
-  inputPlaceholder: 'Ask me anything...'
+  launcherLabel: 'Help',
+  title: 'Company Name',
+  subtitle: 'How can we help you today?',
+  greeting: 'Welcome. I can help with services, pricing, and business inquiries.',
+  inputPlaceholder: 'Type your question...'
 };
+
+const QUICK_ACTIONS = ['Get a Quote', 'Contact Us', 'Business Hours', 'Services'];
 
 function clampUnread(count) {
   if (count <= 0) {
@@ -95,7 +97,7 @@ export default function ChatbotWidget({ config = {} }) {
   return (
     <section className={`fixed right-6 bottom-6 z-1000 ${isOpen ? 'chat-widget-open' : ''}`}>
       <button
-        className="relative grid h-16 w-16 place-items-center rounded-full border-0 bg-[linear-gradient(160deg,#165f82,#0e4b67)] text-[1.05rem] font-bold text-sky-50 shadow-[0_16px_36px_rgba(16,48,66,0.24)] transition-transform duration-200 hover:-translate-y-px hover:scale-[1.03]"
+        className="relative grid h-15 w-15 place-items-center rounded-full border border-white/70 bg-[var(--brand-primary)] px-3 text-[0.9rem] font-semibold text-[var(--text-inverse)] shadow-[var(--widget-shadow)] transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[var(--send-hover)]"
         aria-label="Open chat"
         aria-expanded={isOpen}
         onClick={() => setOpen(!isOpen)}
@@ -103,7 +105,7 @@ export default function ChatbotWidget({ config = {} }) {
       >
         <span>{mergedConfig.launcherLabel}</span>
         <span
-          className={`absolute -right-1 -top-1 grid min-h-5.5 min-w-5.5 place-items-center rounded-full border-2 border-slate-50 bg-rose-500 px-1.5 text-[0.72rem] font-bold leading-none text-white transition-[opacity,transform] duration-150 ${unreadCount > 0 ? 'opacity-100 scale-100' : 'pointer-events-none opacity-0 scale-75'}`}
+          className={`absolute -right-1 -top-1 grid min-h-5 min-w-5 place-items-center rounded-full border-2 border-white bg-[var(--brand-accent)] px-1.5 text-[0.69rem] font-semibold leading-none text-[var(--text-primary)] transition-[opacity,transform] duration-200 ${unreadCount > 0 ? 'opacity-100 scale-100' : 'pointer-events-none opacity-0 scale-75'}`}
           aria-live="polite"
           aria-label="Unread messages"
         >
@@ -112,19 +114,28 @@ export default function ChatbotWidget({ config = {} }) {
       </button>
 
       <div
-        className={`absolute bottom-19 right-0 grid h-[min(620px,calc(100vh-100px))] w-[min(390px,calc(100vw-20px))] grid-rows-[minmax(0,2fr)_minmax(0,6fr)_minmax(0,1fr)] overflow-hidden rounded-[18px] border border-slate-200 bg-(--widget-bg) shadow-[0_16px_36px_rgba(16,48,66,0.24)] transition-[opacity,transform] duration-200 origin-bottom-right ${isOpen ? 'pointer-events-auto translate-y-0 scale-100 opacity-100' : 'pointer-events-none translate-y-5 scale-[0.97] opacity-0'}`}
+        className={`absolute bottom-18 right-0 grid h-[min(640px,calc(100vh-84px))] w-[min(420px,calc(100vw-16px))] grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden rounded-[18px] border border-[var(--widget-border)] bg-[var(--widget-bg)] text-[var(--text-primary)] shadow-[var(--widget-shadow)] transition-[opacity,transform] duration-200 ease-in-out origin-bottom-right ${isOpen ? 'pointer-events-auto translate-y-0 scale-100 opacity-100' : 'pointer-events-none translate-y-5 scale-[0.97] opacity-0'}`}
         aria-hidden={!isOpen}
         role="dialog"
         aria-label="AI chat panel"
       >
-        <header className="flex h-full items-center justify-between gap-3 bg-[var(--header-start)] px-4 py-3.5 pl-4 text-[var(--sidebar-primary-foreground)] sm:pl-4" role="banner">
-          <div className="min-w-0 flex-1">
-            <h2 className="m-0 text-[1.03rem] tracking-[0.2px] text-inherit">{mergedConfig.title}</h2>
-            <p className="mt-1.5 text-[0.82rem] text-sky-100/80">{mergedConfig.subtitle}</p>
+        <header className="flex items-start justify-between gap-3 bg-[var(--header-bg)] px-4 py-3.5 text-[var(--text-inverse)]" role="banner">
+          <div className="flex min-w-0 flex-1 items-start gap-3">
+            <div className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/15 text-[0.72rem] font-semibold tracking-[0.06em] text-white">
+              CO
+            </div>
+            <div className="min-w-0 flex-1">
+              <h2 className="m-0 text-[1rem] font-bold leading-5 tracking-[0.01em] text-inherit">{mergedConfig.title}</h2>
+              <p className="mt-1 text-[0.85rem] font-medium text-white/90">{mergedConfig.subtitle}</p>
+              <div className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2 py-0.5 text-[0.72rem] font-medium text-white/90">
+                <span className="h-1.75 w-1.75 rounded-full bg-[var(--brand-accent)]" aria-hidden="true" />
+                Online now
+              </div>
+            </div>
           </div>
 
           <button
-            className="h-8 w-8 shrink-0 rounded-lg border-0 bg-sky-100 text-[1.1rem] leading-none text-slate-700 transition-colors hover:bg-sky-200"
+            className="h-8 w-8 shrink-0 rounded-lg border border-white/20 bg-white/10 text-[1.1rem] leading-none text-white transition-colors duration-200 hover:bg-white/20"
             aria-label="Minimize chat"
             onClick={() => setOpen(false)}
             type="button"
@@ -137,19 +148,32 @@ export default function ChatbotWidget({ config = {} }) {
           ref={messagesRef}
           aria-live="polite"
           role="log"
-          className="flex min-h-0 flex-col gap-2.5 overflow-y-auto bg-[radial-gradient(circle_at_top_right,rgba(31,111,151,0.12),transparent_38%)] p-3.5"
+          className="flex min-h-0 flex-col gap-3 overflow-y-auto bg-[var(--page-bg)] px-3.5 py-4"
         >
+          <div className="mb-1 flex flex-wrap gap-2">
+            {QUICK_ACTIONS.map((actionLabel) => (
+              <button
+                key={actionLabel}
+                type="button"
+                onClick={() => setInputValue(actionLabel)}
+                className="rounded-full border border-[var(--brand-secondary)] bg-white px-3 py-1.5 text-[0.76rem] font-semibold text-[var(--brand-secondary)] transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[var(--brand-secondary)] hover:text-white"
+              >
+                {actionLabel}
+              </button>
+            ))}
+          </div>
+
           {messages.map((entry, idx) => (
             <div
               key={`${entry.role}-${idx}`}
-              className={`max-w-[82%] whitespace-pre-wrap wrap-break-word rounded-[14px] px-3 py-2.5 text-[0.92rem] leading-[1.42] ${entry.role === 'user' ? 'ml-auto rounded-br-[5px] bg-(--user-bubble) text-(--user-ink)' : 'mr-auto rounded-bl-[5px] border border-slate-200 bg-(--bot-bubble) text-(--bot-ink)'}`}
+              className={`chat-message max-w-[86%] whitespace-pre-wrap wrap-break-word rounded-[16px] px-3.5 py-2.75 text-[0.93rem] leading-[1.5] shadow-[var(--message-shadow)] ${entry.role === 'user' ? 'ml-auto bg-[var(--user-bubble)] text-[var(--user-ink)]' : 'mr-auto border border-[var(--widget-border)] bg-[var(--bot-bubble)] text-[var(--bot-ink)]'}`}
             >
               {entry.text}
             </div>
           ))}
         </div>
 
-        <div className="grid h-full grid-cols-[1fr_auto] items-stretch gap-2 border-t border-slate-200 bg-slate-50 p-2.5">
+        <div className="grid h-full grid-cols-[1fr_auto] items-center gap-2.5 border-t border-[var(--widget-border)] bg-[var(--widget-bg)] p-3">
           <input
             id="msg"
             type="text"
@@ -164,14 +188,14 @@ export default function ChatbotWidget({ config = {} }) {
             placeholder={mergedConfig.inputPlaceholder}
             autoComplete="off"
             aria-label="Your message"
-            className="h-full rounded-[10px] border border-slate-300 px-3 py-0 text-[0.93rem] text-slate-900 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-slate-400 focus:border-sky-600 focus:shadow-[0_0_0_3px_rgba(31,111,151,0.16)]"
+            className="h-11 rounded-[12px] border border-[var(--composer-border)] bg-[var(--composer-bg)] px-3.5 py-0 text-[0.93rem] font-medium text-[var(--text-primary)] outline-none transition-[border-color,box-shadow] duration-200 ease-in-out placeholder:font-normal placeholder:text-slate-400 focus:border-[var(--brand-secondary)] focus:shadow-[0_0_0_3px_rgba(44,106,160,0.14)]"
           />
           <button
             id="sendBtn"
             type="button"
             onClick={sendMessage}
             disabled={isSending}
-            className="min-w-16.5 h-full rounded-[10px] border-0 bg-[var(--primary)] px-3.5 font-bold text-[var(--primary-foreground)] transition-colors duration-200 hover:bg-[var(--sidebar-primary)] disabled:cursor-wait disabled:opacity-70"
+            className="min-w-18 h-11 rounded-[12px] border border-transparent bg-[var(--brand-primary)] px-3.5 text-[0.9rem] font-semibold text-white transition-all duration-200 ease-in-out hover:-translate-y-px hover:bg-[var(--send-hover)] disabled:cursor-wait disabled:opacity-70"
           >
             Send
           </button>
